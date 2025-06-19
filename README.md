@@ -1,51 +1,36 @@
 # 🧠 Semantic Plagiarism Detection Tool
 
-This project is an **AI-powered semantic plagiarism detector** built using **Sentence Transformers (SBERT)**. Unlike traditional methods that rely on matching words, this tool checks for **meaning-level similarity** using **sentence embeddings** and **cosine similarity**.
+This project is an AI-powered semantic plagiarism detection tool that uses **Sentence Transformers (SBERT)** to identify content similarity at the meaning level, not just keywords or phrases. It stores submitted `.txt` documents in a local SQLite database and checks new uploads for plagiarism based on cosine similarity between sentence embeddings.
 
----
+🚀 Features
+- ✅ Upload plain `.txt` files via an interactive widget (in Jupyter Notebook).
+- 🔍 Semantic similarity check using `all-MiniLM-L6-v2` model.
+- 💾 Stores uploaded document content and filename in an SQLite database.
+- ⚠️ Detects plagiarism if semantic similarity exceeds a defined threshold (default: 0.7).
+- 🔒 Prevents duplicate or similar content from being stored again.
 
-## 🚀 Features
+🛠️ Technologies Used
+- Python 3.x
+- [SentenceTransformers](https://www.sbert.net/)
+- [sqlite3](https://docs.python.org/3/library/sqlite3.html)
+- [ipywidgets](https://ipywidgets.readthedocs.io/en/latest/)
+- [IPython.display](https://ipython.readthedocs.io/en/stable/api/generated/IPython.display.html)
 
-- ✅ Upload plain `.txt` files via an interactive widget (Jupyter Notebook)
-- 🔍 Semantic similarity check using `all-MiniLM-L6-v2` model
-- 💾 Stores uploaded content and filename in a **local SQLite database**
-- ⚠️ Flags plagiarism if similarity exceeds a threshold (default: `0.70`)
-- 🔒 Prevents storing semantically similar or duplicate files
+💡 Usage
+Open the Jupyter Notebook (.ipynb file).
+Run all the cells.
+Use the file upload widget to upload a .txt file.
 
----
+The script will:
+Extract and encode the content.
+Compare it with previously saved documents using cosine similarity.
+Notify if plagiarism is detected or save the document to the database.
 
-## 🛠️ Technologies Used
+⚙️ Configuration
+Threshold: You can adjust the similarity threshold by modifying the PLAGIARISM_THRESHOLD variable:
+PLAGIARISM_THRESHOLD = 0.75  (Increase or decrease for strictness)
 
-- Python 3.x  
-- [SentenceTransformers](https://www.sbert.net/)  
-- `sqlite3`  
-- `ipywidgets`  
-- `IPython.display`  
-
----
-
-## 💡 How to Use
-
-1. **Open the Notebook**  
-   Launch the `Plagiarism_Detector.ipynb` file in Jupyter Notebook.
-
-2. **Run All Cells**  
-   Run the notebook cells sequentially to initialize models, database, and UI.
-
-3. **Upload Files**  
-   Use the file upload widget to add a `.txt` file.
-
-4. **What Happens Behind the Scenes**  
-   - Text is extracted and encoded into sentence embeddings
-   - Compared to previously stored documents using **cosine similarity**
-   - If similarity > threshold → flagged as **plagiarized**
-   - If unique → stored in the database
-
----
-
-## ⚙️ Configuration
-
-You can adjust the similarity detection sensitivity:
-
-```python
-PLAGIARISM_THRESHOLD = 0.75  # Default: 0.70
+📌 Limitations
+Designed for .txt file uploads only.
+Only works in Jupyter Notebook due to ipywidgets integration.
+Requires a GPU for faster processing if working with large files or many documents.
